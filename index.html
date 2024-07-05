@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pregunta del Concierto</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+      margin: 0;
+      flex-direction: column;
+      text-align: center;
+    }
+    .question {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    .buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+    }
+    .button {
+      padding: 10px 20px;
+      font-size: 18px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+    }
+    #yesButton {
+      background-color: #4CAF50;
+      color: white;
+    }
+    #noButton {
+      background-color: #f44336;
+      color: white;
+      position: relative;
+    }
+    #fireworks {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      animation: fadeOut 5s forwards;
+      overflow: hidden;
+    }
+    #fireworks h1 {
+      color: white;
+      font-size: 48px;
+      text-align: center;
+      position: absolute;
+      bottom: 20%;
+      width: 100%;
+    }
+    .firework {
+      position: absolute;
+      border-radius: 50%;
+      animation: explode 2s ease-out forwards;
+    }
+
+    @keyframes fadeOut {
+      0% { opacity: 1; }
+      100% { opacity: 0; display: none; }
+    }
+
+    @keyframes explode {
+      0% {
+        width: 0;
+        height: 0;
+        opacity: 1;
+      }
+      100% {
+        width: 100px;
+        height: 100px;
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="question">¿Cierto que se va a disfrutar muchito el concierto?</div>
+  <div class="buttons">
+    <button class="button" id="yesButton">Shi</button>
+    <button class="button" id="noButton">No</button>
+  </div>
+
+  <div id="fireworks">
+    <h1>¡Esho yo sabía, te amo muchito!</h1>
+    <div class="firework" style="background-color: red; top: 50%; left: 50%;"></div>
+    <div class="firework" style="background-color: blue; top: 40%; left: 60%;"></div>
+    <div class="firework" style="background-color: yellow; top: 60%; left: 40%;"></div>
+  </div>
+
+  <script>
+    const noButton = document.getElementById('noButton');
+    const yesButton = document.getElementById('yesButton');
+    const fireworks = document.getElementById('fireworks');
+
+    noButton.addEventListener('mouseover', () => {
+      const buttonWidth = noButton.offsetWidth;
+      const buttonHeight = noButton.offsetHeight;
+      const maxX = window.innerWidth - buttonWidth;
+      const maxY = window.innerHeight - buttonHeight;
+
+      const x = Math.floor(Math.random() * maxX);
+      const y = Math.floor(Math.random() * maxY);
+
+      noButton.style.position = 'absolute';
+      noButton.style.left = `${x}px`;
+      noButton.style.top = `${y}px`;
+    });
+
+    noButton.addEventListener('click', (e) => {
+      e.preventDefault();
+    });
+
+    yesButton.addEventListener('click', () => {
+      fireworks.style.display = 'flex';
+      setTimeout(() => {
+        fireworks.style.display = 'none';
+      }, 5000);
+    });
+  </script>
+</body>
+</html>
